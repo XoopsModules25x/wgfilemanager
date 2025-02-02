@@ -9,6 +9,7 @@
  - updated search (goffy)
  - added file sorting (goffy)
  - added favorites (goffy)
+ - fixed bug with file name with special chars (goffy)
 
 ==============================================================
 1.0 [2024/06/29 13:11:46]

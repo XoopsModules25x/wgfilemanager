@@ -239,43 +239,43 @@ class FileHandler extends \XoopsPersistableObjectHandler
 
         switch ($iconSet) {
             case 'classic':
-                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\classic' . '/';
-                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\classic' . '/';
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '/fileicons/file-icon-vectors-master/dist/icons/classic/';
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '/fileicons/file-icon-vectors-master/dist/icons/classic/';
                 $fileTrailing = '.svg';
                 $fileDefault  = 'default.svg';
                 $fileIcons['type'] = 'svg';
                 break;
             case 'high-contrast':
-                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\high-contrast' . '/';
-                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\high-contrast' . '/';
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '/fileicons/file-icon-vectors-master/dist/icons/high-contrast/';
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '/fileicons/file-icon-vectors-master/dist/icons/high-contrast/';
                 $fileTrailing = '.svg';
                 $fileDefault  = 'default.svg';
                 $fileIcons['type'] = 'svg';
                 break;
             case 'square-o':
-                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\square-o' . '/';
-                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\square-o' . '/';
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '/fileicons/file-icon-vectors-master/dist/icons/square-o/';
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '/fileicons/file-icon-vectors-master/dist/icons/square-o/';
                 $fileTrailing = '.svg';
                 $fileDefault  = 'default.svg';
                 $fileIcons['type'] = 'svg';
                 break;
             case 'vivid':
-                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\vivid' . '/';
-                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\vivid' . '/';
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '/fileicons/file-icon-vectors-master/dist/icons/vivid/';
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '/fileicons/file-icon-vectors-master/dist/icons/vivid/';
                 $fileTrailing = '.svg';
                 $fileDefault  = 'default.svg';
                 $fileIcons['type'] = 'svg';
                 break;
             case 'teambox':
-                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\free-file-icons-master\512px' . '/';
-                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\free-file-icons-master\512px' . '/';
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '/fileicons/free-file-icons-master/512px/';
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '/fileicons/free-file-icons-master/512px/';
                 $fileTrailing = '.png';
                 $fileDefault  = '_blank.png';
                 $fileIcons['type'] = 'png';
                 break;
             case 'eagerterrier':
-                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\mimetypes-link-icons-master\images' . '/';
-                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\mimetypes-link-icons-master\images' . '/';
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '/fileicons/mimetypes-link-icons-master/images/';
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '/fileicons/mimetypes-link-icons-master/images/';
                 $fileTrailing = '-icon-128x128.png';
                 $fileDefault  = 'default-128x128.png';
                 $fileIcons['type'] = 'png';
@@ -304,7 +304,7 @@ class FileHandler extends \XoopsPersistableObjectHandler
                     }
                 }
             } else {
-                throw new \Exception('Folder does not exist!');
+                throw new \Exception('Folder ' . $folderPath . ' does not exist!');
             }
         }
 

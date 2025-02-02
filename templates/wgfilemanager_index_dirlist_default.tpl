@@ -6,7 +6,7 @@
                 <{if $dir.state|default:'closed' == 'open'}>
                     <a class='nav-link active fw-bold' href='<{$wgfilemanager_url}>/index.php?op?list&amp;dir_id=<{$dir.id}>' title='<{$dir.name}>'><i class="bi-folder2-open"></i><{$dir.name}></a>
                 <{else}>
-                    <a class='nav-link ' href='<{$wgfilemanager_url}>/index.php?op?list&amp;dir_id=<{$dir.id}>' title='<{$dir.name}>'><i class="bi-folder"></i><{$dir.name}></a>
+                    <a class='nav-link ' href='<{$wgfilemanager_url}>/index.php?op=list&amp;dir_id=<{$dir.id}>' title='<{$dir.name}>'><i class="bi-folder"></i><{$dir.name}></a>
                 <{/if}>
                 <{if $dir.count_subdirs > 0}>
                     <{include file='db:wgfilemanager_index_dirlist_default.tpl' dir_list=$dir.subdirs}>

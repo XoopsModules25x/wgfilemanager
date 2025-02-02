@@ -208,6 +208,7 @@ class File extends \XoopsObject
             $form->addElement(new \XoopsFormSelectUser(\_MA_WGFILEMANAGER_FILE_SUBMITTER, 'submitter', false, $fileSubmitter));
         } elseif (!$this->isNew()) {
             $form->addElement(new \XoopsFormLabel(\_MA_WGFILEMANAGER_FILE_SUBMITTER, \XoopsUser::getUnameFromId($fileSubmitter)));
+            $form->addElement(new \XoopsFormHidden('submitter', $fileSubmitter));
         }
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));

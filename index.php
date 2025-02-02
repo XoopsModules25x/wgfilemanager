@@ -47,7 +47,6 @@ $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgfilemanager_icon_bi_url', \WGFILEMANAGER_ICONS_URL . '/bootstrap/');
 $GLOBALS['xoopsTpl']->assign('wgfilemanager_url', \WGFILEMANAGER_URL);
 $GLOBALS['xoopsTpl']->assign('wgfilemanager_upload_url', \WGFILEMANAGER_UPLOAD_URL);
-$GLOBALS['xoopsTpl']->assign('wgfilemanager_upload_url', \WGFILEMANAGER_UPLOAD_URL);
 //preferences
 $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
 $GLOBALS['xoopsTpl']->assign('panel_type', $helper->getConfig('panel_type'));
@@ -135,11 +134,11 @@ switch ($op) {
                 $orderby = 'DESC';
                 break;
             case Constants::COOKIE_SORT_DATE_CREATE_ASC:
-                $sortby = 'date_create';
+                $sortby = 'date_created';
                 $orderby = 'ASC';
                 break;
             case Constants::COOKIE_SORT_DATE_CREATE_DESC:
-                $sortby = 'date_create';
+                $sortby = 'date_created';
                 $orderby = 'DESC';
                 break;
         }
@@ -195,7 +194,10 @@ switch ($op) {
             $fileAll = $fileHandler->getAll($crFile);
             foreach (\array_keys($fileAll) as $i) {
                 $file = $fileAll[$i]->getValuesFile();
-                $ext  = substr(strrchr($file['name'], '.'), 1);
+                $ext = '';
+                if (strpos($file['name'],'.') > 0) {
+                    $ext  = substr(strrchr($file['name'], '.'), 1);
+                }
                 $fileCategory = isset($fileIcons['files'][$ext]) ? (int)$fileIcons['files'][$ext]['category'] : 0;
                 $file['category']  = $fileCategory;
                 $file['icon_url']  = isset($fileIcons['files'][$ext]) ? $fileIcons['files'][$ext]['src'] : $fileIcons['default'];
