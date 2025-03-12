@@ -35,6 +35,7 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_ADMENU6', 'Berechtigungen');
 \define('_MI_WGFILEMANAGER_ADMENU7', 'Klonen');
 \define('_MI_WGFILEMANAGER_ADMENU8', 'Feedback');
+\define('_MI_WGFILEMANAGER_ADMENU9', 'Favoriten');
 \define('_MI_WGFILEMANAGER_ABOUT', 'Über');
 // ---------------- Admin Nav ----------------
 \define('_MI_WGFILEMANAGER_ADMIN_PAGER', 'Admin Bereich');
@@ -48,8 +49,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_SMNAME3', 'Datei einsenden');
 //\define('_MI_WGFILEMANAGER_SMNAME6', 'Search');
 // Blocks
-\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST', 'Block Liste Verzeichnisse');
-\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST_DESC', 'Block Liste Verzeichnisse');
+\define('_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST', 'Block Liste Verzeichnisse Favoriten');
+\define('_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST_DESC', 'Block Liste Verzeichnisse und Favoriten');
 \define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_LAST', 'Block letzte Verzeichnisse');
 \define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_LAST_DESC', 'Block letzte Verzeichnisse');
 \define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_NEW', 'Block neue Verzeichnisse');
@@ -58,6 +59,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_LAST_DESC', 'Block letzte Dateien');
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_NEW', 'Block neue Dateien');
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_NEW_DESC', 'Block neue Dateien');
+\define('_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST_COLLAPSABLE', 'Block Liste Verzeichnisse Favoriten aufklappbar');
+\define('_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST_COLLAPSABLE_DESC', 'Block Liste Verzeichnisse und Favoriten aufklappbar');
 // Config
 \define('_MI_WGFILEMANAGER_EDITOR_ADMIN', 'Editor Admin');
 \define('_MI_WGFILEMANAGER_EDITOR_ADMIN_DESC', 'Bitte den zu verwendenden Editor für den Admin-Bereich wählen');
@@ -86,7 +89,7 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_ICONSET_NONE', 'Kein Icon-Set verwenden');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION', 'Position Verzeichnisliste');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_DESC', 'Wähle die Position der Verzeichnisliste auf der Index-Seite');
-\define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_NONE', 'Keine Verzeichnisliste auf der Indexseite verwenden');
+\define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_NONE', 'Keine Verzeichnisliste auf der Indexseite verwenden. Ich verwende einen Block stattdessen.');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_LEFT', 'Linke Seite');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_TOP', 'Oberhalb');
 //\define('_MI_WGFILEMANAGER_DIRECTORYSTYLE', 'List Style Directory Page');

@@ -13,12 +13,11 @@
 
 CREATE TABLE `wgfilemanager_directory` (
   `id`           INT(8)          UNSIGNED NOT NULL AUTO_INCREMENT,
-  `parent_id`    INT(10)         NOT NULL DEFAULT '0',
+  `parent_id`    INT(8)         NOT NULL DEFAULT '0',
   `name`         VARCHAR(255)    NOT NULL DEFAULT '',
   `description`  TEXT            NOT NULL ,
   `fullpath`     VARCHAR(255)    NOT NULL DEFAULT '',
   `weight`       INT(10)         NOT NULL DEFAULT '0',
-  `favorite`     INT(1)          NOT NULL DEFAULT '0',
   `date_created` INT(11)         NOT NULL DEFAULT '0',
   `submitter`    INT(10)         NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -30,7 +29,7 @@ CREATE TABLE `wgfilemanager_directory` (
 
 CREATE TABLE `wgfilemanager_file` (
   `id`           INT(8)          UNSIGNED NOT NULL AUTO_INCREMENT,
-  `directory_id` INT(10)         NOT NULL DEFAULT '0',
+  `directory_id` INT(8)         NOT NULL DEFAULT '0',
   `name`         VARCHAR(255)    NOT NULL DEFAULT '',
   `description`  TEXT            NOT NULL ,
   `mimetype`     VARCHAR(255)    NOT NULL DEFAULT '',
@@ -39,7 +38,6 @@ CREATE TABLE `wgfilemanager_file` (
   `size`         INT(11)         NOT NULL DEFAULT '0',
   `ip`           VARCHAR(45)     NOT NULL DEFAULT '',
   `status`       INT(1)          NOT NULL DEFAULT '0',
-  `favorite`     INT(1)          NOT NULL DEFAULT '0',
   `date_created` INT(11)         NOT NULL DEFAULT '0',
   `submitter`    INT(10)         NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -60,4 +58,17 @@ CREATE TABLE `wgfilemanager_mimetype` (
    `date_created` INT(11)         NOT NULL DEFAULT '0',
    `submitter`    INT(10)         NOT NULL DEFAULT '0',
    PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+#
+# Structure table for `wgfilemanager_favorite` 5
+#
+
+CREATE TABLE `wgfilemanager_favorite` (
+    `id`           INT(8)       UNSIGNED NOT NULL AUTO_INCREMENT,
+    `directory_id` INT(8)       NOT NULL DEFAULT '0',
+    `file_id`      INT(8)       NOT NULL DEFAULT '0',
+    `date_created` INT(11)      NOT NULL DEFAULT '0',
+    `submitter`    INT(10)      NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;

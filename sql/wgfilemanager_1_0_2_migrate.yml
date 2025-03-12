@@ -1,0 +1,130 @@
+wgfilemanager_directory:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: id
+            attributes: ' INT(8)          UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: parent_id
+            attributes: ' INT(8)         NOT NULL DEFAULT ''0'' '
+        -
+            name: name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: description
+            attributes: ' TEXT            NOT NULL  '
+        -
+            name: fullpath
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: weight
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: date_created
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: id
+            unique: true
+wgfilemanager_file:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: id
+            attributes: ' INT(8)          UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: directory_id
+            attributes: ' INT(8)         NOT NULL DEFAULT ''0'' '
+        -
+            name: name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: description
+            attributes: ' TEXT            NOT NULL  '
+        -
+            name: mimetype
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: mtime
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: ctime
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: size
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: ip
+            attributes: ' VARCHAR(45)     NOT NULL DEFAULT '''''''' '
+        -
+            name: status
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: date_created
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: id
+            unique: true
+wgfilemanager_mimetype:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: id
+            attributes: ' INT(8)          UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: extension
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: mimetype
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: desc
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: admin
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: user
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: category
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: date_created
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: id
+            unique: true
+wgfilemanager_favorite:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: id
+            attributes: ' INT(8)       UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: directory_id
+            attributes: ' INT(8)       NOT NULL DEFAULT ''0'' '
+        -
+            name: file_id
+            attributes: ' INT(8)       NOT NULL DEFAULT ''0'' '
+        -
+            name: date_created
+            attributes: ' INT(11)      NOT NULL DEFAULT ''0'' '
+        -
+            name: submitter
+            attributes: ' INT(10)      NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: id
+            unique: true

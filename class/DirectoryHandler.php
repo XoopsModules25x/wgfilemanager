@@ -84,7 +84,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
      * @param string $order
      * @return int
      */
-    public function getCountDirectory($start = 0, $limit = 0, $sort = 'id ASC, name', $order = 'ASC')
+    public function getCountDirectory($start = 0, $limit = 0, $sort = 'id', $order = 'DESC')
     {
         $crCountDirectory = new \CriteriaCompo();
         $crCountDirectory = $this->getDirectoryCriteria($crCountDirectory, $start, $limit, $sort, $order);
@@ -99,7 +99,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
      * @param string $order
      * @return array
      */
-    public function getAllDirectory($start = 0, $limit = 0, $sort = 'id ASC, name', $order = 'ASC')
+    public function getAllDirectory($start = 0, $limit = 0, $sort = 'id', $order = 'DESC')
     {
         $crAllDirectory = new \CriteriaCompo();
         $crAllDirectory = $this->getDirectoryCriteria($crAllDirectory, $start, $limit, $sort, $order);
@@ -328,12 +328,14 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
     /**
      * Returns an array directories
      *
-     * @param int $dirId
-     * @param int $dirCurrent
-     * @param int $levelCurrent
+     * @param int    $dirId
+     * @param int    $dirCurrent
+     * @param int    $levelCurrent
+     * @param string $sortBy
+     * @param string $orderBy
      * @return array
      */
-    public function getDirList($dirId, $dirCurrent, $levelCurrent = 1) {
+    public function getDirList($dirId, $dirCurrent, $levelCurrent = 1, $sortBy = 'weight ASC, id', $orderBy = 'ASC') {
 
         $result = [];
 /*        if (0 === $dirId) {
@@ -349,11 +351,24 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
             $result[0]['count_files'] = $this->countFiles('');
             $result[0]['subdirs'] = [];
         }*/
+        //create list of parents
+        $parents  = [];
+        $parentId = 0;
+        $dirCurrObj = $this->get($dirCurrent);
+        if (\is_object($dirCurrObj)) {
+            $parentId = $dirCurrObj->getVar('parent_id');
+        }
+        $parents[] = $parentId;
+        while ($parentId > 0) {
+            $parentId = $this->get($parentId)->getVar('parent_id');
+            $parents[] = $parentId;
+        }
+
         $levelCurrent++;
         $crSubDir = new \CriteriaCompo();
         $crSubDir->add(new \Criteria('parent_id', $dirId));
-        $crSubDir->setSort('weight ASC, id');
-        $crSubDir->setOrder('ASC');
+        $crSubDir->setSort($sortBy);
+        $crSubDir->setOrder($orderBy);
         if ($this->getCount($crSubDir) > 0) {
             $directoryAll = $this->getAll($crSubDir);
             foreach (\array_keys($directoryAll) as $i) {
@@ -362,9 +377,13 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
                 $result[$i]['parent_id'] = $directory['parent_id'];
                 $result[$i]['name'] = $directory['name'];
                 $result[$i]['state'] = $i === $dirCurrent ? 'open' : 'closed';
+                $result[$i]['highlight'] = $i === $dirCurrent;
+                $result[$i]['show'] = in_array($i, $parents);
                 $result[$i]['count_subdirs'] = $directory['count_subdirs'];
                 $result[$i]['count_files'] = $directory['count_files'];
                 $result[$i]['level'] = $levelCurrent;
+                $result[$i]['weight'] = $directory['weight'];
+                $result[$i]['favorite_id'] = $directory['favorite_id'];
                 if ($directory['count_subdirs'] > 0) {
                     $result[$i]['subdirs'] = $this->getDirList($i, $dirCurrent, $levelCurrent);
                 }
@@ -418,10 +437,14 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
         $result = [];
         do {
             $dirObj = $this->get($dirId);
-            if ($dirId > 1) {
-                $result[$dirId] = $dirObj->getVar('name');
+            if (\is_object($dirObj)) {
+                if ($dirId > 1) {
+                    $result[$dirId] = $dirObj->getVar('name');
+                }
+                $dirId = $dirObj->getVar('parent_id');
+            } else {
+                $dirId = 0;
             }
-            $dirId = $dirObj->getVar('parent_id');
         } while ($dirId > 0);
 
         return $result;
@@ -430,30 +453,22 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
     /**
      * Returns an array of directories
      *
-     * @param int $dirId
+     * @param int    $dirId
+     * @param string $sortBy
+     * @param string $orderBy
      * @return array
      */
-    public function getSubDirList($dirId) {
+    public function getSubDirList($dirId, $sortBy = 'weight ASC, id', $orderBy = 'ASC') {
 
         $result = [];
         $crSubDir = new \CriteriaCompo();
         $crSubDir->add(new \Criteria('parent_id', $dirId));
-        $crSubDir->setSort('weight ASC, id');
-        $crSubDir->setOrder('ASC');
+        $crSubDir->setSort($sortBy);
+        $crSubDir->setOrder($orderBy);
         if ($this->getCount($crSubDir) > 0) {
             $directoryAll = $this->getAll($crSubDir);
             foreach (\array_keys($directoryAll) as $i) {
-                $directory = $directoryAll[$i]->getValuesDir();
-                $result[$i]['id'] = $directory['id'];
-                $result[$i]['parent_id'] = $directory['parent_id'];
-                $result[$i]['name'] = $directory['name'];
-                $result[$i]['description_text']  = $directory['description_text'];
-                $result[$i]['date_created_text']  = $directory['date_created_text'];
-                $result[$i]['submitter_text']  = $directory['submitter_text'];
-                $result[$i]['count_subdirs'] = $directory['count_subdirs'];
-                $result[$i]['count_files'] = $directory['count_files'];
-                $result[$i]['ctime_text'] = \formatTimestamp($directory['date_created'], 's');
-                $result[$i]['favorite'] = $directory['favorite'];
+                $result[$i] = $directoryAll[$i]->getValuesDir();
             }
         }
 
@@ -468,19 +483,58 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
      */
     public function getFavDirList() {
         $result = [];
-        $crDirectory = new \CriteriaCompo();
-        $crDirectory->add(new \Criteria('favorite', '1'));
-        $directoryCount = $this->getCount($crDirectory);
-        if ($directoryCount > 0) {
-            $crDirectory->setSort('name');
-            $crDirectory->setOrder('asc');
-            $directoryAll = $this->getAll($crDirectory);
+        //get current user
+        $userUid = 0;
+        if (isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser'])) {
+            $userUid = $GLOBALS['xoopsUser']->uid();
+        }
+        if ($userUid > 0) {
+            $crDirectory = new \CriteriaCompo();
+            $directoryCount = $this->getCount($crDirectory);
+            if ($directoryCount > 0) {
+                $crDirectory->setSort('name');
+                $crDirectory->setOrder('asc');
+                $directoryAll = $this->getAll($crDirectory);
+                foreach (\array_keys($directoryAll) as $i) {
+                    $dirValues = $directoryAll[$i]->getValuesDir();
+                    if ((int)$dirValues['favorite_id'] > 0) {
+                        $result[] = $dirValues;
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Returns an array directories
+     *
+     * @param int $parentId
+     * @return boolean
+     */
+    public function setDirWeight($parentId) {
+
+        if (0 == $parentId) {
+            return true;
+        }
+        $crSubDir = new \CriteriaCompo();
+        $crSubDir->add(new \Criteria('parent_id', $parentId));
+        $crSubDir->setSort('weight ASC, id');
+        $crSubDir->setOrder('ASC');
+        if ($this->getCount($crSubDir) > 0) {
+            $directoryAll = $this->getAll($crSubDir);
+            $counter = 0;
             foreach (\array_keys($directoryAll) as $i) {
-                $result[] = $directoryAll[$i]->getValuesDir();
+                $counter++;
+                $directoryObj = $this->get($i);
+                $directoryObj->setVar('weight', $counter);
+                $this->insert($directoryObj);
+                $this->setDirWeight($i);
             }
         }
 
-        return $result;
+        return true;
+
     }
 
 }

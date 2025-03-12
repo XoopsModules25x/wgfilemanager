@@ -82,7 +82,7 @@ class FileHandler extends \XoopsPersistableObjectHandler
      * @param string $order
      * @return int
      */
-    public function getCountFile($start = 0, $limit = 0, $sort = 'id ASC, directory_id', $order = 'ASC')
+    public function getCountFile($start = 0, $limit = 0, $sort = 'id', $order = 'DESC')
     {
         $crCountFile = new \CriteriaCompo();
         $crCountFile = $this->getFileCriteria($crCountFile, $start, $limit, $sort, $order);
@@ -97,7 +97,7 @@ class FileHandler extends \XoopsPersistableObjectHandler
      * @param string $order
      * @return array
      */
-    public function getAllFile($start = 0, $limit = 0, $sort = 'id ASC, directory_id', $order = 'ASC')
+    public function getAllFile($start = 0, $limit = 0, $sort = 'id', $order = 'DESC')
     {
         $crAllFile = new \CriteriaCompo();
         $crAllFile = $this->getFileCriteria($crAllFile, $start, $limit, $sort, $order);
@@ -319,18 +319,26 @@ class FileHandler extends \XoopsPersistableObjectHandler
      */
     public function getFavFileList() {
         $result = [];
-        $crFile = new \CriteriaCompo();
-        $crFile->add(new \Criteria('favorite', '1'));
-        $fileCount = $this->getCount($crFile);
-        if ($fileCount > 0) {
-            $crFile->setSort('name');
-            $crFile->setOrder('asc');
-            $fileAll = $this->getAll($crFile);
-            foreach (\array_keys($fileAll) as $i) {
-                $result[] = $fileAll[$i]->getValuesFile();
+        //get current user
+        $userUid = 0;
+        if (isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser'])) {
+            $userUid = $GLOBALS['xoopsUser']->uid();
+        }
+        if ($userUid > 0) {
+            $crFile = new \CriteriaCompo();
+            $fileCount = $this->getCount($crFile);
+            if ($fileCount > 0) {
+                $crFile->setSort('name');
+                $crFile->setOrder('asc');
+                $fileAll = $this->getAll($crFile);
+                foreach (\array_keys($fileAll) as $i) {
+                    $fileValues = $fileAll[$i]->getValuesFile();
+                    if ((int)$fileValues['favorite_id'] > 0) {
+                        $result[] = $fileValues;
+                    }
+                }
             }
         }
-
         return $result;
     }
 

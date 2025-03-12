@@ -50,6 +50,13 @@ if ((bool)$helper->getConfig('use_broken')) {
         'icon' => $sysPathIcon32.'/brokenlink.png',
     ];
 }
+if ((bool)$helper->getConfig('use_favorites')) {
+    $adminmenu[] = [
+        'title' => \_MI_WGFILEMANAGER_ADMENU9,
+        'link' => 'admin/favorite.php',
+        'icon' => $sysPathIcon32.'/brokenlink.png',
+    ];
+}
 $adminmenu[] = [
     'title' => \_MI_WGFILEMANAGER_ADMENU5,
     'link' => 'admin/mimetype.php',

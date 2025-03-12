@@ -183,6 +183,7 @@ switch ($op) {
                         }
                     }
                 }
+                $directoryHandler->setDirWeight($dirParentId);
                 \redirect_header('directory.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_AM_WGFILEMANAGER_FORM_OK);
             }
             $GLOBALS['xoopsTpl']->assign('error', $directoryObj->getHtmlErrors());
@@ -284,6 +285,32 @@ switch ($op) {
         }
         break;
     case 'favorite_pin':
+        //check perms
+        if (!$permissionsHandler->getPermGlobalSubmit()) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
+        // Check params
+        if (0 === $dirId) {
+            \redirect_header('index.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
+        }
+        //get current user
+        $userUid = 0;
+        if (isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser'])) {
+            $userUid = $GLOBALS['xoopsUser']->uid();
+        }
+        if (0 === $userUid) {
+            \redirect_header('index.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
+        }
+        $favoriteObj = $favoriteHandler->create();
+        $favoriteObj->setVar('directory_id', $dirId);
+        $favoriteObj->setVar('date_created', \time());
+        $favoriteObj->setVar('submitter', $userUid);
+        if ($favoriteHandler->insert($favoriteObj)) {
+            \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_AM_WGFILEMANAGER_FORM_OK);
+        } else {
+            \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_MA_WGFILEMANAGER_FAVORITE_ERROR_SET);
+        }
+        break;
     case 'favorite_unpin':
         //check perms
         if (!$permissionsHandler->getPermGlobalSubmit()) {
@@ -293,16 +320,16 @@ switch ($op) {
         if (0 === $dirId) {
             \redirect_header('index.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
         }
-        $directoryObj   = $directoryHandler->get($dirId);
-        $directoryObj->setVar('favorite', (int)('favorite_pin' === $op));
-        if ($directoryHandler->insert($directoryObj)) {
+        $favoriteId = Request::getInt('favorite_id');
+        if (0 === $favoriteId) {
+            \redirect_header('index.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
+        }
+        $favoriteObj = $favoriteHandler->get($favoriteId);
+        if ($favoriteHandler->delete($favoriteObj, true)) {
             \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_AM_WGFILEMANAGER_FORM_OK);
         } else {
             \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_MA_WGFILEMANAGER_FAVORITE_ERROR_SET);
         }
-        unset($directoryObj);
-
-        
         break;
 /*    case 'order':
         $aorder         = Request::getArray('menuItem');

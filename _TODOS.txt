@@ -1,7 +1,5 @@
 - pdf print in firefox
 
-- pin file
-
 https://github.com/nao-pon/xelfinder
 which is XOOPS implementation of the elFinder (here is the demo: https://studio-42.github.io/elFinder/)
 Tutorial: https://github.com/Studio-42/elFinder/wiki

@@ -32,10 +32,10 @@ include \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/preloads/autoloader.
 // ------------------- Informations ------------------- //
 $modversion = [
     'name'                => \_MI_WGFILEMANAGER_NAME,
-    'version'             => '1.0.1',
-    'module_status'       => 'Beta 2',
-    'release'             => '06/29/2024',
-    'release_date'        => '2024/06/29',
+    'version'             => '1.0.2',
+    'module_status'       => 'RC1',
+    'release'             => '03/02/2025', // mm/dd/yyyy
+    'release_date'        => '2025/03/02', // yyyy/mm/dd
     'description'         => \_MI_WGFILEMANAGER_DESC,
     'author'              => 'Goffy - Wedega',
     'author_mail'         => 'webmaster@wedega.com',
@@ -83,6 +83,7 @@ $modversion['templates'] = [
     ['file' => 'wgfilemanager_admin_index.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgfilemanager_admin_directory.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgfilemanager_admin_file.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgfilemanager_admin_favorite.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgfilemanager_admin_mimetype.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgfilemanager_admin_broken.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgfilemanager_admin_permissions.tpl', 'description' => '', 'type' => 'admin'],
@@ -97,7 +98,9 @@ $modversion['templates'] = [
     ['file' => 'wgfilemanager_index_actions_file.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_card.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_dirlist_default.tpl', 'description' => ''],
+    ['file' => 'wgfilemanager_index_dirlist_collapsable.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_favlist_default.tpl', 'description' => ''],
+    ['file' => 'wgfilemanager_index_favlist_collapsable.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_filepanel_header.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_directory.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_directory_default_table.tpl', 'description' => ''],
@@ -116,6 +119,7 @@ $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 $modversion['tables'] = [
     'wgfilemanager_directory',
     'wgfilemanager_file',
+    'wgfilemanager_favorite',
     'wgfilemanager_mimetype',
 ];
 // ------------------- Search ------------------- //
@@ -137,13 +141,22 @@ if ($currdirname == $moduleDirName) {
 // ------------------- Default Blocks ------------------- //
 // Directory list
 $modversion['blocks'][] = [
-    'file'        => 'directory.php',
-    'name'        => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST,
-    'description' => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST_DESC,
-    'show_func'   => 'b_wgfilemanager_dirlist_show',
-    'edit_func'   => '',
-    'template'    => 'wgfilemanager_block_dirlist.tpl',
-    'options'     => 'dirlist',
+    'file'        => 'dirfav_list.php',
+    'name'        => \_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST,
+    'description' => \_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST_DESC,
+    'show_func'   => 'b_wgfilemanager_dirfavlist_show',
+    'edit_func'   => 'b_wgfilemanager_dirfavlist_edit',
+    'template'    => 'wgfilemanager_block_dirfavlist.tpl',
+    'options'     => 'default|0|0',
+];
+$modversion['blocks'][] = [
+    'file'        => 'dirfav_list.php',
+    'name'        => \_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST_COLLAPSABLE,
+    'description' => \_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST_COLLAPSABLE_DESC,
+    'show_func'   => 'b_wgfilemanager_dirfavlist_show',
+    'edit_func'   => 'b_wgfilemanager_dirfavlist_edit',
+    'template'    => 'wgfilemanager_block_dirfavlist.tpl',
+    'options'     => 'collapsable|0|0',
 ];
 // Directory last
 $modversion['blocks'][] = [
@@ -153,7 +166,7 @@ $modversion['blocks'][] = [
     'show_func'   => 'b_wgfilemanager_directory_show',
     'edit_func'   => 'b_wgfilemanager_directory_edit',
     'template'    => 'wgfilemanager_block_directory.tpl',
-    'options'     => 'last|5|25|0',
+    'options'     => 'last|5|0',
 ];
 // Directory new
 $modversion['blocks'][] = [
@@ -163,7 +176,7 @@ $modversion['blocks'][] = [
     'show_func'   => 'b_wgfilemanager_directory_show',
     'edit_func'   => 'b_wgfilemanager_directory_edit',
     'template'    => 'wgfilemanager_block_directory.tpl',
-    'options'     => 'new|5|25|0',
+    'options'     => 'new|5|0',
 ];
 // File last
 $modversion['blocks'][] = [
@@ -173,7 +186,7 @@ $modversion['blocks'][] = [
     'show_func'   => 'b_wgfilemanager_file_show',
     'edit_func'   => 'b_wgfilemanager_file_edit',
     'template'    => 'wgfilemanager_block_file.tpl',
-    'options'     => 'last|5|25|0',
+    'options'     => 'last|5|0',
 ];
 // File new
 $modversion['blocks'][] = [
@@ -183,7 +196,7 @@ $modversion['blocks'][] = [
     'show_func'   => 'b_wgfilemanager_file_show',
     'edit_func'   => 'b_wgfilemanager_file_edit',
     'template'    => 'wgfilemanager_block_file.tpl',
-    'options'     => 'new|5|25|0',
+    'options'     => 'new|5|0',
 ];
 // ------------------- Config ------------------- //
 // Editor Admin

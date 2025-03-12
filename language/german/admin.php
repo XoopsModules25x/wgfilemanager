@@ -37,6 +37,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGFILEMANAGER_THEREARENT_FILE', 'Es gibt keine Dateien');
 \define('_AM_WGFILEMANAGER_THEREARENT_MIMETYPE', 'Es gibt keine Mimetypes');
 \define('_AM_WGFILEMANAGER_THEREARENT_FILEBROKEN', 'Es gibt keine fehlerhaften Dateien');
+\define('_AM_WGFILEMANAGER_THEREARENT_FAVORITE', 'Es gibt keine Favoriten');
 // Save/Delete
 \define('_AM_WGFILEMANAGER_FORM_OK', 'Erfolgreich gespeichert');
 \define('_AM_WGFILEMANAGER_FORM_DELETE_OK', 'Erfolgreich gelöscht');
@@ -100,3 +101,6 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGFILEMANAGER_DONATION_AMOUNT', 'Spendenbetrag');
 \define('_AM_WGFILEMANAGER_MAINTAINEDBY', ' wird unterstützt durch ');
 // ---------------- End ----------------
+\define('_AM_WGFILEMANAGER_FAVORITE_ID', 'ID');
+\define('_AM_WGFILEMANAGER_FAVORITE_DATE_CREATED', 'Datum erstellt');
+\define('_MA_WGFILEMANAGER_FAVORITE_SUBMITTER', 'Einsender');

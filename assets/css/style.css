@@ -34,7 +34,3 @@ ul.menu > li + li:before {
 .printOnly {
     display: none;
 }
-
-img {
-    max-width: 300px;
-}

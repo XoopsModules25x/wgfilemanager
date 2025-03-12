@@ -31,6 +31,7 @@ $directoryHandler   = $helper->getHandler('Directory');
 $fileHandler        = $helper->getHandler('File');
 $mimetypeHandler    = $helper->getHandler('Mimetype');
 $permissionsHandler = $helper->getHandler('Permissions');
+$favoriteHandler    = $helper->getHandler('Favorite');
 // 
 $myts = MyTextSanitizer::getInstance();
 // Default Css Style

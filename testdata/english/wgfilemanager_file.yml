@@ -11,7 +11,6 @@
     status: '2'
     date_created: '1721731249'
     submitter: '1'
-    favorite: '0'
 -
     id: '2'
     directory_id: '1'
@@ -25,7 +24,6 @@
     status: '2'
     date_created: '1721731310'
     submitter: '1'
-    favorite: '0'
 -
     id: '3'
     directory_id: '4'
@@ -39,7 +37,6 @@
     status: '2'
     date_created: '1721904231'
     submitter: '1'
-    favorite: '0'
 -
     id: '4'
     directory_id: '4'
@@ -53,7 +50,6 @@
     status: '2'
     date_created: '1721904245'
     submitter: '1'
-    favorite: '0'
 -
     id: '5'
     directory_id: '7'
@@ -67,7 +63,6 @@
     status: '2'
     date_created: '1721904249'
     submitter: '1'
-    favorite: '0'
 -
     id: '6'
     directory_id: '7'
@@ -81,7 +76,6 @@
     status: '2'
     date_created: '1721904256'
     submitter: '1'
-    favorite: '0'
 -
     id: '7'
     directory_id: '5'
@@ -95,7 +89,6 @@
     status: '2'
     date_created: '1721904262'
     submitter: '1'
-    favorite: '0'
 -
     id: '8'
     directory_id: '5'
@@ -109,7 +102,6 @@
     status: '2'
     date_created: '1721904267'
     submitter: '1'
-    favorite: '0'
 -
     id: '9'
     directory_id: '5'
@@ -123,7 +115,6 @@
     status: '2'
     date_created: '1721904271'
     submitter: '1'
-    favorite: '0'
 -
     id: '10'
     directory_id: '5'
@@ -137,7 +128,6 @@
     status: '2'
     date_created: '1721904276'
     submitter: '1'
-    favorite: '0'
 -
     id: '11'
     directory_id: '5'
@@ -151,7 +141,6 @@
     status: '2'
     date_created: '1721904285'
     submitter: '1'
-    favorite: '0'
 -
     id: '12'
     directory_id: '1'
@@ -165,7 +154,6 @@
     status: '2'
     date_created: '1721905152'
     submitter: '1'
-    favorite: '0'
 -
     id: '13'
     directory_id: '1'
@@ -179,7 +167,6 @@
     status: '2'
     date_created: '1721905177'
     submitter: '1'
-    favorite: '0'
 -
     id: '14'
     directory_id: '1'
@@ -193,7 +180,6 @@
     status: '2'
     date_created: '1721905189'
     submitter: '1'
-    favorite: '0'
 -
     id: '15'
     directory_id: '1'
@@ -207,7 +193,6 @@
     status: '2'
     date_created: '1721905203'
     submitter: '1'
-    favorite: '0'
 -
     id: '16'
     directory_id: '1'
@@ -221,7 +206,6 @@
     status: '2'
     date_created: '1721905214'
     submitter: '1'
-    favorite: '0'
 -
     id: '17'
     directory_id: '1'
@@ -235,7 +219,6 @@
     status: '2'
     date_created: '1721905226'
     submitter: '1'
-    favorite: '0'
 -
     id: '18'
     directory_id: '1'
@@ -249,4 +232,3 @@
     status: '2'
     date_created: '1721905244'
     submitter: '1'
-    favorite: '0'

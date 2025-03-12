@@ -25,21 +25,17 @@ require_once __DIR__ . '/main.php';
 
 // Admin Edit
 \define('_MB_WGFILEMANAGER_DISPLAY', 'Wie viele Einträge anzeigen');
-//\define('_MB_WGFILEMANAGER_DISPLAY_SPOTLIGHT', "How Many Items to Display (only valid if you select 'all')");
-\define('_MB_WGFILEMANAGER_TITLE_LENGTH', 'Titel Länge');
-//\define('_MB_WGFILEMANAGER_CATTODISPLAY', 'Categories to Display');
-//\define('_MB_WGFILEMANAGER_ALLCAT', 'All Categories');
+\define('_MB_WGFILEMANAGER_NAME_LENGTH', 'Länge Namen (0 = keine Längenbeschränkung=');
 // Directory
-//\define('_MB_WGFILEMANAGER_DIRECTORY_TO_DISPLAY', 'Directory to Display');
-//\define('_MB_WGFILEMANAGER_ALL_DIRECTORY', 'All Directory');
 \define('_MB_WGFILEMANAGER_DIR_NAME', 'Name');
 \define('_MB_WGFILEMANAGER_DIRECTORY_GOTO', 'Gehe zu Verzeichnis');
 \define('_MB_WGFILEMANAGER_DIRECTORY_HOME', 'Standardverzeichnis');
 // File
-//\define('_MB_WGFILEMANAGER_FILE_TO_DISPLAY', 'File to Display');
-//\define('_MB_WGFILEMANAGER_ALL_FILE', 'All File');
 \define('_MB_WGFILEMANAGER_FILE_DIRECTORY_ID', 'Verzeichnis');
 \define('_MB_WGFILEMANAGER_FILE_NAME', 'Name');
-//\define('_MB_WGFILEMANAGER_FILE_DESCRIPTION', 'Description');
 \define('_MB_WGFILEMANAGER_FILE_GOTO', 'Gehe zu Datei');
-// ---------------- End ----------------
+// Directory/Favorite list collapsable
+\define('_MB_WGFILEMANAGER_DIRFAV_COL_TYPE', 'Display Type');
+\define('_MB_WGFILEMANAGER_DIRFAV_COL_TYPE_0', 'Both lists collapsable');
+\define('_MB_WGFILEMANAGER_DIRFAV_COL_TYPE_1', 'Only favorite list collapsable');
+\define('_MB_WGFILEMANAGER_DIRFAV_COL_TYPE_2', 'Only directory list collapsable');

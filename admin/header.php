@@ -35,6 +35,9 @@ $helper = \XoopsModules\Wgfilemanager\Helper::getInstance();
 $directoryHandler = $helper->getHandler('Directory');
 $fileHandler = $helper->getHandler('File');
 $mimetypeHandler = $helper->getHandler('Mimetype');
+if ((bool)$helper->getConfig('use_favorites')) {
+    $favoriteHandler = $helper->getHandler('Favorite');
+}
 $myts = MyTextSanitizer::getInstance();
 
 // 

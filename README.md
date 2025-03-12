@@ -31,10 +31,11 @@ If you like the wgFilemanager module and thanks to the long process for giving t
 ## Features
 The module currently provides:
 * Browse files and directories
-  * 3 different styles
+  * 4 different styles
     * list
     * grouped
     * cards
+    * big cards
   * display/hide file preview and/or icons
 
 * File management:
@@ -48,12 +49,16 @@ The module currently provides:
 * Directory management:
   * Create directory
   * Rename directory
-  * Move directory by drag&drop
   * Deleting directory with complete content
 
 * Permission management:
   * Global permissions
   * Permissions by directory
+
+* Favorites
+  * Mark directories or files as favorites
+
+Themes: this module is optimized for https://github.com/XoopsThemes/sbadmin5
 
 ## Extras
 /themes/bootstrap4: templates for Bootstrap4 themes like xswatch4

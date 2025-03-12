@@ -11,11 +11,11 @@
     <{if $showBtnDetails|default:false}>
         <a class='btn btn-sm btn-outline-primary' href='file.php?op=show&amp;file_id=<{$file.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_DETAILS}>'><img src="<{$wgfilemanager_icon_bi_url}>search.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_DETAILS}>" ></a>
     <{/if}>
-    <{if $useFavorites|default:false}>
-        <{if $file.favorite > 0}>
-            <a class='btn btn-sm btn-outline-primary' href='file.php?op=favorite_unpin&amp;file_id=<{$file.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_UNPIN}>'><img src="<{$wgfilemanager_icon_bi_url}>pin.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_UNPIN}>" ></a>
+    <{if $useFavorites|default:false && $userUid|default:0 > 0}>
+        <{if $file.favorite_id > 0}>
+            <a class='btn btn-sm btn-outline-primary' href='file.php?op=favorite_unpin&amp;file_id=<{$file.id}>&amp;favorite_id=<{$file.favorite_id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_UNPIN}>'><img src="<{$wgfilemanager_icon_bi_url}>pin.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_UNPIN}>" ></a>
         <{else}>
-            <a class='btn btn-sm btn-outline-primary' href='file.php?op=favorite_pin&amp;file_id=<{$file.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}>'><img src="<{$wgfilemanager_icon_bi_url}>pin-angle.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}>" ></a>
+            <a class='btn btn-sm btn-outline-primary' href='file.php?op=favorite_pin&amp;file_id=<{$file.id}>&amp;favorite_id=<{$file.favorite_id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}>'><img src="<{$wgfilemanager_icon_bi_url}>pin-angle.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}>" ></a>
         <{/if}>
     <{/if}>
 </div>

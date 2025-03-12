@@ -55,3 +55,9 @@ a.space-before {
     border: 1px solid #ff0000;
     margin:20px 0;
 }
+.wgf-div-link {
+    display: inline;
+    color: #212529;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}

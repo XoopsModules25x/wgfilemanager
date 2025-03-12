@@ -59,7 +59,6 @@ class File extends \XoopsObject
         $this->initVar('mtime', \XOBJ_DTYPE_INT);
         $this->initVar('ip', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('status', \XOBJ_DTYPE_INT);
-        $this->initVar('favorite', \XOBJ_DTYPE_INT);
         $this->initVar('date_created', \XOBJ_DTYPE_INT);
         $this->initVar('submitter', \XOBJ_DTYPE_INT);
     }
@@ -206,7 +205,7 @@ class File extends \XoopsObject
         $fileSubmitter = $this->isNew() ? $uidCurrent : $this->getVar('submitter');
         if ($isAdmin) {
             $form->addElement(new \XoopsFormSelectUser(\_MA_WGFILEMANAGER_FILE_SUBMITTER, 'submitter', false, $fileSubmitter));
-        } elseif (!$this->isNew()) {
+        } else {
             $form->addElement(new \XoopsFormLabel(\_MA_WGFILEMANAGER_FILE_SUBMITTER, \XoopsUser::getUnameFromId($fileSubmitter)));
             $form->addElement(new \XoopsFormHidden('submitter', $fileSubmitter));
         }
@@ -245,10 +244,28 @@ class File extends \XoopsObject
             $ret['real_url']     = \WGFILEMANAGER_REPO_URL . $directoryObj->getVar('fullpath') . '/' . $fileName;
             $ret['real_path']    = \WGFILEMANAGER_REPO_PATH . $directoryObj->getVar('fullpath') . '/' . $fileName;
         }
-        $ret['print_url']          = $ret['real_url'];
-        $ret['description_text']   = $this->getVar('description', 'e');
-        $ret['description_short']  = $utility::truncateHtml($ret['description'], $editorMaxchar);
-        $status                    = $this->getVar('status');
+        //get current user
+        $userUid = 0;
+        if (isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser'])) {
+            $userUid = $GLOBALS['xoopsUser']->uid();
+        }
+        $ret['favorite_id'] = 0;
+        if ($userUid > 0) {
+            $favoriteHandler = $helper->getHandler('Favorite');
+            $crFavorite = new \CriteriaCompo();
+            $crFavorite->add(new \Criteria('file_id', $this->getVar('id')));
+            $crFavorite->add(new \Criteria('submitter', $userUid));
+            if ($favoriteHandler->getCount($crFavorite)) {
+                $favoriteObj = $favoriteHandler->getObjects($crFavorite);
+                $ret['favorite_id'] = $favoriteObj[0]->getVar('id');
+            }
+            unset($favoriteObj);
+            unset($crFavorite);
+        }
+        $ret['print_url']         = $ret['real_url'];
+        $ret['description_text']  = $this->getVar('description', 'e');
+        $ret['description_short'] = $utility::truncateHtml($ret['description'], $editorMaxchar);
+        $status                   = $this->getVar('status');
         switch ($status) {
             case Constants::STATUS_NONE:
             default:
@@ -267,12 +284,12 @@ class File extends \XoopsObject
                 $status_text = \_AM_WGFILEMANAGER_STATUS_BROKEN;
                 break;
         }
-        $ret['status_text']        = $status_text;
-        $ret['mtime_text']         = \formatTimestamp($this->getVar('mtime'), 's');
-        $ret['ctime_text']         = \formatTimestamp($this->getVar('ctime'), 's');
-        $ret['size_text']          = $fileHandler->FileSizeConvert($this->getVar('size'));
-        $ret['date_created_text']  = \formatTimestamp($this->getVar('date_created'), 's');
-        $ret['submitter_text']     = \XoopsUser::getUnameFromId($this->getVar('submitter'));
+        $ret['status_text']       = $status_text;
+        $ret['mtime_text']        = \formatTimestamp($this->getVar('mtime'), 's');
+        $ret['ctime_text']        = \formatTimestamp($this->getVar('ctime'), 's');
+        $ret['size_text']         = $fileHandler->FileSizeConvert($this->getVar('size'));
+        $ret['date_created_text'] = \formatTimestamp($this->getVar('date_created'), 's');
+        $ret['submitter_text']    = \XoopsUser::getUnameFromId($this->getVar('submitter'));
         return $ret;
     }
 

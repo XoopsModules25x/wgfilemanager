@@ -55,7 +55,6 @@ class Directory extends \XoopsObject
         $this->initVar('description', \XOBJ_DTYPE_OTHER);
         $this->initVar('fullpath', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('weight', \XOBJ_DTYPE_INT);
-        $this->initVar('favorite', \XOBJ_DTYPE_INT);
         $this->initVar('date_created', \XOBJ_DTYPE_INT);
         $this->initVar('submitter', \XOBJ_DTYPE_INT);
     }
@@ -149,11 +148,11 @@ class Directory extends \XoopsObject
         }
         // Form Text dirWeight
         $dirWeight = $this->isNew() ? $directoryHandler->getCount() + 1 : $this->getVar('weight');
-        if ($isAdmin) {
-            $form->addElement(new \XoopsFormText(\_MA_WGFILEMANAGER_DIRECTORY_WEIGHT, 'weight', 50, 255, $dirWeight), true);
-        } else {
+        //if ($isAdmin) {
+            //$form->addElement(new \XoopsFormText(\_MA_WGFILEMANAGER_DIRECTORY_WEIGHT, 'weight', 50, 255, $dirWeight), true);
+        //} else {
             $form->addElement(new \XoopsFormHidden('weight', $dirWeight));
-        }
+        //}
         // Form Text Date Select dirDate_created
         $dirDate_created = $this->isNew() ? \time() : $this->getVar('date_created');
         $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGFILEMANAGER_DIRECTORY_DATE_CREATED, 'date_created', '', $dirDate_created));
@@ -238,12 +237,32 @@ class Directory extends \XoopsObject
         } else {
             $ret['parent_text'] = 'error get parent name';
         }
+        //get current user
+        $userUid = 0;
+        if (isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser'])) {
+            $userUid = $GLOBALS['xoopsUser']->uid();
+        }
+        $ret['favorite_id'] = 0;
+        if ($userUid > 0) {
+            $favoriteHandler = $helper->getHandler('Favorite');
+            $crFavorite = new \CriteriaCompo();
+            $crFavorite->add(new \Criteria('directory_id', $this->getVar('id')));
+            $crFavorite->add(new \Criteria('submitter', $userUid));
+            if ($favoriteHandler->getCount($crFavorite)) {
+                $favoriteObj = $favoriteHandler->getObjects($crFavorite);
+                $ret['favorite_id'] = $favoriteObj[0]->getVar('id');
+            }
+            unset($favoriteObj);
+            unset($crFavorite);
+        }
         $ret['count_subdirs']     = $directoryHandler->countSubDirs($this->getVar('id'));
         $ret['count_files']       = $directoryHandler->countFiles($this->getVar('fullpath'));
         $ret['description_text']  = $this->getVar('description', 'e');
         $ret['description_short'] = $utility::truncateHtml($ret['description'], $editorMaxchar);
         $ret['date_created_text'] = \formatTimestamp($this->getVar('date_created'), 's');
         $ret['submitter_text']    = \XoopsUser::getUnameFromId($this->getVar('submitter'));
+        $ret['ctime_text']        = $ret['date_created_text'];
+        $ret['directory_id']      = $this->getVar('id');
         return $ret;
     }
 }

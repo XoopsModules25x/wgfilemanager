@@ -105,7 +105,7 @@ function b_wgfilemanager_file_edit($options)
     $form = \_MB_WGFILEMANAGER_DISPLAY . ' : ';
     $form .= "<input type='hidden' name='options[0]' value='".$options[0]."' >";
     $form .= "<input type='text' name='options[1]' size='5' maxlength='255' value='" . $options[1] . "' >&nbsp;<br>";
-    $form .= \_MB_WGFILEMANAGER_TITLE_LENGTH . " : <input type='text' name='options[2]' size='5' maxlength='255' value='" . $options[2] . "' ><br><br>";
+    $form .= \_MB_WGFILEMANAGER_NAME_LENGTH . " : <input type='text' name='options[2]' size='5' maxlength='255' value='" . $options[2] . "' ><br><br>";
     \array_shift($options);
     \array_shift($options);
     \array_shift($options);

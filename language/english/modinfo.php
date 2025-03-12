@@ -28,13 +28,14 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_DESC', 'This module is maintaining files and directories');
 // ---------------- Admin Menu ----------------
 \define('_MI_WGFILEMANAGER_ADMENU1', 'Dashboard');
-\define('_MI_WGFILEMANAGER_ADMENU2', 'Directory');
-\define('_MI_WGFILEMANAGER_ADMENU3', 'File');
+\define('_MI_WGFILEMANAGER_ADMENU2', 'Directories');
+\define('_MI_WGFILEMANAGER_ADMENU3', 'Files');
 \define('_MI_WGFILEMANAGER_ADMENU4', 'Broken items');
 \define('_MI_WGFILEMANAGER_ADMENU5', 'Mime Types');
 \define('_MI_WGFILEMANAGER_ADMENU6', 'Permissions');
 \define('_MI_WGFILEMANAGER_ADMENU7', 'Clone');
 \define('_MI_WGFILEMANAGER_ADMENU8', 'Feedback');
+\define('_MI_WGFILEMANAGER_ADMENU9', 'Favorites');
 \define('_MI_WGFILEMANAGER_ABOUT', 'About');
 // ---------------- Admin Nav ----------------
 \define('_MI_WGFILEMANAGER_ADMIN_PAGER', 'Admin pager');
@@ -48,8 +49,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_SMNAME3', 'Submit File');
 //\define('_MI_WGFILEMANAGER_SMNAME6', 'Search');
 // Blocks
-\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST', 'Block directory list');
-\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST_DESC', 'Block for list of directories');
+\define('_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST', 'Block directories favorites list');
+\define('_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST_DESC', 'Block for list of directories and favorites');
 \define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_LAST', 'Block last directories');
 \define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_LAST_DESC', 'Block show last directories');
 \define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_NEW', 'Block new directories');
@@ -58,6 +59,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_LAST_DESC', 'Block show last files');
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_NEW', 'Block new files');
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_NEW_DESC', 'Block new files description');
+\define('_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST_COLLAPSABLE', 'Block directories favorites list collapsable');
+\define('_MI_WGFILEMANAGER_DIRFAV_BLOCK_LIST_COLLAPSABLE_DESC', 'Block for collapsable list of directories and favorites ');
 // Config
 \define('_MI_WGFILEMANAGER_EDITOR_ADMIN', 'Editor admin');
 \define('_MI_WGFILEMANAGER_EDITOR_ADMIN_DESC', 'Select the editor which should be used in admin area for text area fields');
@@ -86,7 +89,7 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_ICONSET_NONE', 'Do not use an icon set');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION', 'Position Directory List');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_DESC', 'Select the position of the directory list on index page');
-\define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_NONE', 'Do not use directory list on index page');
+\define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_NONE', 'Do not use directory list on index page. I use a block instead.');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_LEFT', 'Left side');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_TOP', 'On top');
 //\define('_MI_WGFILEMANAGER_DIRECTORYSTYLE', 'List Style Directory Page');
