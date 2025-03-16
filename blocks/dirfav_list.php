@@ -88,16 +88,16 @@ function b_wgfilemanager_dirfavlist_show($options)
     $GLOBALS['xoopsTpl']->assign('lengthName', $lengthName);
 
     //get directory list
-    $block['dir_list'] = $directoryHandler->getDirList(0, $dirId);
+    $block['dir_list'] = $directoryHandler->getDirList(0, $dirId, 1,'weight ASC, id',  'ASC', $lengthName);
 
     $block['fav_list'] = [];
     if ((bool)$helper->getConfig('use_favorites')) {
         //get fav list
         $favList = [];
         //get directory fav list
-        $favList['dirs'] = $directoryHandler->getFavDirList();
+        $favList['dirs'] = $directoryHandler->getFavDirList($lengthName);
         //get directory fav list
-        $favList['files'] = $fileHandler->getFavFileList();
+        $favList['files'] = $fileHandler->getFavFileList($lengthName);
         $block['fav_list'] = $favList;
         $GLOBALS['xoopsTpl']->assign('countFavlist', count($favList['dirs']) + count($favList['files']));
     }

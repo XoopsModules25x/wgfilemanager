@@ -25,6 +25,7 @@ namespace XoopsModules\Wgfilemanager;
  */
 
 use XoopsModules\Wgfilemanager;
+use XoopsModules\Wgfilemanager\Common\SysUtility;
 
 
 /**
@@ -315,9 +316,10 @@ class FileHandler extends \XoopsPersistableObjectHandler
     /**
      * Returns an array of favorite files
      *
+     * @param int $lengthName
      * @return array
      */
-    public function getFavFileList() {
+    public function getFavFileList($lengthName = 0) {
         $result = [];
         //get current user
         $userUid = 0;
@@ -333,6 +335,9 @@ class FileHandler extends \XoopsPersistableObjectHandler
                 $fileAll = $this->getAll($crFile);
                 foreach (\array_keys($fileAll) as $i) {
                     $fileValues = $fileAll[$i]->getValuesFile();
+                    if ($lengthName > 0) {
+                        $fileValues['name'] = SysUtility::truncateHtml($fileValues['name'], $lengthName, '...', true);
+                    }
                     if ((int)$fileValues['favorite_id'] > 0) {
                         $result[] = $fileValues;
                     }

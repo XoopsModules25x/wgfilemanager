@@ -26,7 +26,10 @@ namespace XoopsModules\Wgfilemanager;
 
 use Xmf\Request;
 use XoopsModules\Wgfilemanager;
-use XoopsModules\Wgfilemanager\Common\FilesManagement;
+use XoopsModules\Wgfilemanager\Common\{
+    FilesManagement,
+    SysUtility
+};
 
 
 /**
@@ -333,24 +336,12 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
      * @param int    $levelCurrent
      * @param string $sortBy
      * @param string $orderBy
+     * @param int    $lengthName
      * @return array
      */
-    public function getDirList($dirId, $dirCurrent, $levelCurrent = 1, $sortBy = 'weight ASC, id', $orderBy = 'ASC') {
+    public function getDirList($dirId, $dirCurrent, $levelCurrent = 1, $sortBy = 'weight ASC, id', $orderBy = 'ASC', $lengthName = 0) {
 
         $result = [];
-/*        if (0 === $dirId) {
-            $result[0]['id'] = 0;
-            $result[0]['parent_id'] = 0;
-            $result[0]['name'] = \_MA_WGFILEMANAGER_DIRECTORY_HOME;
-            $result[0]['state'] = 0 === $dirCurrent ? 'open' : 'closed';
-            $result[0]['class'] = 'home';
-            $result[0]['level'] = 0;
-            $crSubDir = new \CriteriaCompo();
-            $crSubDir->add(new \Criteria('parent_id', $dirId));
-            $result[0]['count_subdirs'] = $this->getCount($crSubDir);
-            $result[0]['count_files'] = $this->countFiles('');
-            $result[0]['subdirs'] = [];
-        }*/
         //create list of parents
         $parents  = [];
         $parentId = 0;
@@ -375,7 +366,11 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
                 $directory = $directoryAll[$i]->getValuesDir();
                 $result[$i]['id'] = $directory['id'];
                 $result[$i]['parent_id'] = $directory['parent_id'];
-                $result[$i]['name'] = $directory['name'];
+                if ($lengthName > 0) {
+                    $result[$i]['name'] = SysUtility::truncateHtml($directory['name'], $lengthName, '...', true);
+                } else {
+                    $result[$i]['name'] = $directory['name'];
+                }
                 $result[$i]['state'] = $i === $dirCurrent ? 'open' : 'closed';
                 $result[$i]['highlight'] = $i === $dirCurrent;
                 $result[$i]['show'] = in_array($i, $parents);
@@ -385,7 +380,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
                 $result[$i]['weight'] = $directory['weight'];
                 $result[$i]['favorite_id'] = $directory['favorite_id'];
                 if ($directory['count_subdirs'] > 0) {
-                    $result[$i]['subdirs'] = $this->getDirList($i, $dirCurrent, $levelCurrent);
+                    $result[$i]['subdirs'] = $this->getDirList($i, $dirCurrent, $levelCurrent, $sortBy, $orderBy, $lengthName);
                 }
             }
         }
@@ -479,10 +474,14 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
     /**
      * Returns an array of favorite directories
      *
+     * @param int $lengthName
      * @return array
      */
-    public function getFavDirList() {
+    public function getFavDirList($lengthName = 0) {
         $result = [];
+        if (0 === $lengthName) {
+            $lengthName = 1000;
+        }
         //get current user
         $userUid = 0;
         if (isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser'])) {
@@ -497,6 +496,9 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
                 $directoryAll = $this->getAll($crDirectory);
                 foreach (\array_keys($directoryAll) as $i) {
                     $dirValues = $directoryAll[$i]->getValuesDir();
+                    if ($lengthName > 0) {
+                        $dirValues['name'] = SysUtility::truncateHtml($dirValues['name'], $lengthName, '...', true);
+                    }
                     if ((int)$dirValues['favorite_id'] > 0) {
                         $result[] = $dirValues;
                     }

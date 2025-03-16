@@ -31,54 +31,54 @@ $helper = \XoopsModules\Wgfilemanager\Helper::getInstance();
 $adminmenu[] = [
     'title' => \_MI_WGFILEMANAGER_ADMENU1,
     'link' => 'admin/index.php',
-    'icon' => $sysPathIcon32.'/dashboard.png',
+    'icon' => 'assets/icons/32/dashboard.png',
 ];
 $adminmenu[] = [
     'title' => \_MI_WGFILEMANAGER_ADMENU2,
     'link' => 'admin/directory.php',
-    'icon' => 'assets/icons/32/category.png',
+    'icon' => 'assets/icons/32/directory.png',
 ];
 $adminmenu[] = [
     'title' => \_MI_WGFILEMANAGER_ADMENU3,
     'link' => 'admin/file.php',
-    'icon' => 'assets/icons/32/fileshare.png',
+    'icon' => 'assets/icons/32/file.png',
 ];
 if ((bool)$helper->getConfig('use_broken')) {
     $adminmenu[] = [
         'title' => \_MI_WGFILEMANAGER_ADMENU4,
         'link' => 'admin/broken.php',
-        'icon' => $sysPathIcon32.'/brokenlink.png',
+        'icon' => 'assets/icons/32/broken.png',
     ];
 }
 if ((bool)$helper->getConfig('use_favorites')) {
     $adminmenu[] = [
         'title' => \_MI_WGFILEMANAGER_ADMENU9,
         'link' => 'admin/favorite.php',
-        'icon' => $sysPathIcon32.'/brokenlink.png',
+        'icon' => 'assets/icons/32/favorite.png',
     ];
 }
 $adminmenu[] = [
     'title' => \_MI_WGFILEMANAGER_ADMENU5,
     'link' => 'admin/mimetype.php',
-    'icon' => 'assets/icons/32/fileshare.png',
+    'icon' => 'assets/icons/32/mimetype.png',
 ];
 $adminmenu[] = [
     'title' => \_MI_WGFILEMANAGER_ADMENU6,
     'link' => 'admin/permissions.php',
-    'icon' => $sysPathIcon32.'/permissions.png',
+    'icon' => 'assets/icons/32/permissions.png',
 ];
 $adminmenu[] = [
     'title' => \_MI_WGFILEMANAGER_ADMENU7,
     'link' => 'admin/clone.php',
-    'icon' => $sysPathIcon32.'/page_copy.png',
+    'icon' => 'assets/icons/32/clone.png',
 ];
 $adminmenu[] = [
     'title' => \_MI_WGFILEMANAGER_ADMENU8,
     'link' => 'admin/feedback.php',
-    'icon' => $sysPathIcon32.'/mail_foward.png',
+    'icon' => 'assets/icons/32/feedback.png',
 ];
 $adminmenu[] = [
     'title' => \_MI_WGFILEMANAGER_ABOUT,
     'link' => 'admin/about.php',
-    'icon' => $sysPathIcon32.'/about.png',
+    'icon' => 'assets/icons/32/about.png',
 ];
