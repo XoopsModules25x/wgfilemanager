@@ -2,15 +2,6 @@
 
 ![alt XOOPS CMS](https://xoops.org/images/logoXoopsPhp8.png)
 
-# wgFilemanager
-
-![alt XOOPS CMS](./assets/images/wgfilemanager.jpg)
-A XOOPS module for file management.
-
-## Support
-
-If you like the wgFilemanager module and thanks to the long process for giving the opportunity to the new module to be created in a moment, consider making a donation to <a href="https://xoops.org/modules/xdonations/" target="_blank" title="Donate to Xoops">Xoops.org</a>
-
 ## wgFilemanager version 1.x
 
 [![Build Status](https://scrutinizer-ci.com/g/ggoffy/wgfilemanager/badges/build.png?b=master)](https://travis-ci.org/ggoffy/wgfilemanager)
@@ -19,6 +10,16 @@ If you like the wgFilemanager module and thanks to the long process for giving t
 [![Quality Score](https://img.shields.io/scrutinizer/g/ggoffy/wgblocks.svg?style=flat)](https://scrutinizer-ci.com/g/ggoffy/wgfilemanager)
 [![Gem](https://img.shields.io/gem/dt/rails.svg)](XoopsModules25x/wgfilemanager)
 [![Latest Version](https://img.shields.io/github/release/XoopsModules25x/wgfilemanager.svg?style=flat)](https://github.com/XoopsModules25x/wgfilemanager/releases/latest)
+
+# wgFilemanager
+
+![module image](./assets/images/wgfilemanager.jpg)
+
+A XOOPS module for file management.
+
+## Support
+
+If you like the wgFilemanager module and thanks to the long process for giving the opportunity to the new module to be created in a moment, consider making a donation to <a href="https://xoops.org/modules/xdonations/" target="_blank" title="Donate to Xoops">Xoops.org</a>
 
 ## Require:
 - XOOPS 2.5.11;
