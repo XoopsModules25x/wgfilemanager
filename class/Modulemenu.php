@@ -33,9 +33,7 @@ class Modulemenu
     {
 
         $moduleDirName = \basename(\dirname(__DIR__));
-        $subcount      = 1;
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
-        $urlModule     = \XOOPS_URL . '/modules/' . $moduleDirName . '/';
 
         require_once $pathname . 'include/common.php';
         $helper = \XoopsModules\Wgfilemanager\Helper::getInstance();
@@ -43,19 +41,19 @@ class Modulemenu
         //load necessary language files from this module
         $helper->loadLanguage('modinfo');
 
-        // start creation of link list as array
         $items = [];
-        $items[$subcount]['name']  = \_MI_WGFILEMANAGER_SMNAME1;
-        $items[$subcount]['url'] =  $urlModule . 'index.php';
-
-        $subcount++;
-        $items[$subcount]['name']  = \_MI_WGFILEMANAGER_SMNAME2;
-        $items[$subcount]['url'] =  $urlModule . 'directory.php';
-
-        $subcount++;
-        $items[$subcount]['name']  = \_MI_WGFILEMANAGER_SMNAME3;
-        $items[$subcount]['url'] =  $urlModule . 'file.php?op=new';
-        // end creation of link list as array
+        $items[] = [
+            'name' => \_MI_WGFILEMANAGER_SMNAME1,
+            'url'  =>  'index.php',
+        ];
+        $items[] = [
+            'name' => \_MI_WGFILEMANAGER_SMNAME2,
+            'url'  =>  'directory.php',
+        ];
+        $items[] = [
+            'name' => \_MI_WGFILEMANAGER_SMNAME3,
+            'url'  =>  'file.php?op=new',
+        ];
 
         return $items;
     }
@@ -67,7 +65,46 @@ class Modulemenu
      */
     public function getMenuitemsSbadmin5()
     {
-        return $this->getMenuitemsDefault();
+        $moduleDirName = \basename(\dirname(__DIR__));
+        $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
+        $urlModule     = \XOOPS_URL . '/modules/' . $moduleDirName . '/';
+
+        require_once $pathname . 'include/common.php';
+        $helper = \XoopsModules\Wgfilemanager\Helper::getInstance();
+
+        //load necessary language files from this module
+        /*        $helper->loadLanguage('common');
+                $helper->loadLanguage('main');*/
+        $helper->loadLanguage('modinfo');
+
+        // start creation of link list as array
+
+        $requestUri = $_SERVER['REQUEST_URI'];
+        /*read navbar items related to perms of current user*/
+        $items = [];
+        $items[] = [
+            'highlight' => \strpos($requestUri, $moduleDirName . '/index.php') > 0,
+            'url' => $urlModule . 'index.php',
+            'icon' => '<i class="fa fa-tachometer fa-fw fa-lg"></i>',
+            'name' => \_MI_WGFILEMANAGER_SMNAME1,
+            'sublinks' => []
+        ];
+        $items[] = [
+            'highlight' => \strpos($requestUri, $moduleDirName . '/directory.php') > 0,
+            'url' => $urlModule . 'directory.php',
+            'icon' => '<i class="fa fa-folder fa-fw fa-lg"></i>',
+            'name' => \_MI_WGFILEMANAGER_SMNAME2,
+            'sublinks' => []
+        ];
+        $items[] = [
+            'highlight' => \strpos($requestUri, $moduleDirName . '/file.php') > 0,
+            'url' => $urlModule . 'file.php',
+            'icon' => '<i class="fa fa-file fa-fw fa-lg"></i>',
+            'name' => \_MI_WGFILEMANAGER_SMNAME3,
+            'sublinks' => []
+        ];
+
+        return $items;
     }
 
 
