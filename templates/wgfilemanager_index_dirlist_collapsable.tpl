@@ -162,7 +162,7 @@
                     </nav>
                 </div>
             <{else}>
-                <a class="nav-link<{if $dir1.highlight|default:false}> active<{/if}>" href="<{$dir1.url}>" title="<{$dir1.name}>">
+                <a class="nav-link<{if $dir1.highlight|default:false}> active<{/if}>" href="<{$wgfilemanager_url}>/index.php?op=list&amp;dir_id=<{$dir1.id}>" title="<{$dir1.name}>">
                     <{if $dir1.state|default:'closed' == 'open'}><i class="bi-folder2-open"></i><{else}><i class="bi-folder"></i><{/if}>
                     <{$dir1.name}></a>
             <{/if}>
