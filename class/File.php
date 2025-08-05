@@ -123,15 +123,15 @@ class File extends \XoopsObject
                 //$fileDirectory = '/uploads/wgfilemanager/files/file';
                 //$fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_MA_WGFILEMANAGER_FILE_NAME_UPLOADS, ".$fileDirectory/"), $fileName));
                 $maxsize = $helper->getConfig('maxsize_file');
-                $fileUploadTray->addElement(new \XoopsFormFile('', 'name', $maxsize));
+                $fileUploadTray->addElement(new \XoopsFormFile('', 'fil_name', $maxsize));
                 $fileUploadTray->addElement(new \XoopsFormLabel(\_MA_WGFILEMANAGER_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' ' . \_MA_WGFILEMANAGER_FORM_UPLOAD_SIZE_MB));
                 $form->addElement($fileUploadTray, true);
             } else {
-                $form->addElement(new \XoopsFormHidden('name', $fileName));
+                $form->addElement(new \XoopsFormHidden('fil_name', $fileName));
             }
         } else {
-            $form->addElement(new \XoopsFormText(\_MA_WGFILEMANAGER_FILE_NAME, 'name', 100, 150, $fileName));
-            $form->addElement(new \XoopsFormHidden('name_old', $fileName));
+            $form->addElement(new \XoopsFormText(\_MA_WGFILEMANAGER_FILE_NAME, 'fil_name', 100, 150, $fileName));
+            $form->addElement(new \XoopsFormHidden('fil_name_old', $fileName));
         }
         // Form Editor DhtmlTextArea fileDescription
         $editorConfigs = [];

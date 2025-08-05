@@ -61,3 +61,7 @@ a.space-before {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
 }
+.wgf-i {
+    color:#000000;
+    font-weight: bold !important;
+}

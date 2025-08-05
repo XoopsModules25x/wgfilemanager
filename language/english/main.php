@@ -139,6 +139,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_FORM_EDIT', 'Modification');
 \define('_MA_WGFILEMANAGER_FORM_DELETE', 'Clear');
 \define('_MA_WGFILEMANAGER_INVALID_PARAM', 'Invalid parameter');
+\define('_MA_WGFILEMANAGER_FORM_UPLOAD_MULTIDOTS', 'The file name contains multiple dots. This can cause problems during file upload');
 // ---------------- Admin Permissions ----------------
 // Permissions
 \define('_MA_WGFILEMANAGER_PERM_GLOBAL', 'Permissions global');

@@ -71,6 +71,27 @@
 <{/if}>
 <{if $form|default:''}>
     <{$form|default:false}>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadInput = document.getElementById('fil_name');
+
+            if (uploadInput) {
+                uploadInput.addEventListener('change', function() {
+                    const file = this.files[0];
+
+                    if (file) {
+                        const filename = file.name;
+                        const dotCount = (filename.match(/\./g) || []).length;
+
+                        if (dotCount > 1) {
+                            alert("<{$smarty.const._MA_WGFILEMANAGER_FORM_UPLOAD_MULTIDOTS}>");
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 <{/if}>
 <{if $error|default:''}>
     <{$error|default:false}>

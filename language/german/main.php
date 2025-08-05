@@ -139,6 +139,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_FORM_EDIT', 'Ändern');
 \define('_MA_WGFILEMANAGER_FORM_DELETE', 'Leeren');
 \define('_MA_WGFILEMANAGER_INVALID_PARAM', 'Ungültiger Parameter');
+\define('_MA_WGFILEMANAGER_FORM_UPLOAD_MULTIDOTS', 'Der Dateiname enthält mehrere Punkte. Dies kann zu Problemen beim Upload führen');
 // ---------------- Admin Permissions ----------------
 // Permissions
 \define('_MA_WGFILEMANAGER_PERM_GLOBAL', 'Globale Berechtigungen');

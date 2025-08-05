@@ -154,9 +154,9 @@ switch ($op) {
         if (0 == $fileId) {
             //upload new file
             require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
-            $filename     = $_FILES['name']['name'];
-            $fileMimetype = $_FILES['name']['type'];
-            $fileSize     = $_FILES['name']['size'];
+            $filename     = $_FILES['fil_name']['name'];
+            $fileMimetype = $_FILES['fil_name']['type'];
+            $fileSize     = $_FILES['fil_name']['size'];
             $fileNewName  = substr($filename, 0, (strlen($filename)) - (strlen(strrchr($filename, '.'))));
             $extension    = \str_replace($fileNewName, '', $filename);
             //do same replacements as class/uploader.php
@@ -192,8 +192,8 @@ switch ($op) {
             }
         } else {
             //handle existing
-            $fileName    = Request::getString('name');
-            $fileNameOld = Request::getString('name_old');
+            $fileName    = Request::getString('fil_name');
+            $fileNameOld = Request::getString('fil_name_old');
             $movefile    = $directoryIdOld !== $directoryId;
             $renameFile  = $fileName !== $fileNameOld;
             if ($directoryIdOld !== $directoryId) {
