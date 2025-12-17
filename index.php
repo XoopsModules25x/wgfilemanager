@@ -77,7 +77,7 @@ switch ($op) {
         // cookie style
         $cookieIndexstyle = Request::getString($cookieStyle, 'none', 'COOKIE');
         if ('none' === $cookieIndexstyle) {
-            $cookieIndexstyle = Constants::COOKIE_STYLE_DEFAULT;
+            $cookieIndexstyle = (string)Constants::COOKIE_STYLE_DEFAULT;
             xoops_setcookie($cookieStyle, $cookieIndexstyle, time() + 60 * 60 * 24 * 30);
         } else {
             $cookieIndexstyle = $_COOKIE[$cookieStyle];
@@ -91,7 +91,7 @@ switch ($op) {
         // cookie preview
         $cookieIndexPreview = Request::getString($cookiePreview, 'none', 'COOKIE');
         if ('none' === $cookieIndexPreview) {
-            $cookieIndexPreview = Constants::COOKIE_NOPREVIEW;
+            $cookieIndexPreview = (string)Constants::COOKIE_NOPREVIEW;
             xoops_setcookie($cookiePreview, $cookieIndexPreview, time() + 60 * 60 * 24 * 30);
         } else {
             $cookieIndexPreview = $_COOKIE[$cookiePreview];
@@ -103,7 +103,7 @@ switch ($op) {
         // cookie sorting
         $cookieIndexSort = Request::getString($cookieSorting, 'none', 'COOKIE');
         if ('none' === $cookieIndexSort) {
-            $cookieIndexSort = Constants::COOKIE_SORT_NAME_ASC;
+            $cookieIndexSort = (string)Constants::COOKIE_SORT_NAME_ASC;
             xoops_setcookie($cookieSorting, $cookieIndexSort, time() + 60 * 60 * 24 * 30);
         } else {
             $cookieIndexSort = $_COOKIE[$cookieSorting];

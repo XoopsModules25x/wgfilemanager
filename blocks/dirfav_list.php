@@ -26,7 +26,9 @@ use XoopsModules\Wgfilemanager\Helper;
 //use XoopsModules\Wgfilemanager\Constants;
 use Xmf\Request;
 
+$moduleDirName      = \basename(__DIR__);
 require_once \XOOPS_ROOT_PATH . '/modules/wgfilemanager/include/common.php';
+include \XOOPS_ROOT_PATH . '/modules/wgfilemanager/preloads/autoloader.php';
 
 /**
  * Function show block
